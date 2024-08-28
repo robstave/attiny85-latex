@@ -1,6 +1,7 @@
 package latex
 
 import (
+	"attiny85-latex/internal/data"
 	"strings"
 )
 
@@ -17,7 +18,7 @@ func generateFromTemplate(templatePath string, pin int, pinText string) (string,
 	}
 
 	pinData := Pin{
-		Ypos:    PinValue(pin),
+		Ypos:    data.PinValue(pin),
 		Pin:     pin,
 		PinText: pinText,
 	}

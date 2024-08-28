@@ -1,4 +1,9 @@
-package latex
+package data
+
+const ANALOGIN = "AIN"
+const DIGIN = "DIN"
+const DIGOUT = "DOUT"
+const PWM = "PWM"
 
 // PinValue returns the corresponding value based on the pin number
 func PinValue(pin int) float64 {

@@ -1,0 +1,33 @@
+\documentclass{article}
+\usepackage{circuitikz}
+\usepackage{tikz}
+ 
+\usepackage[paperwidth=5in, 
+    paperheight=3in,
+    left=0.20in,
+    right=0.2in,
+    top=0.2in,
+    bottom=0.2in]{geometry}
+\usepackage{amssymb} % For triangle symbols if used in text
+
+    
+\begin{document}
+
+\begin{center}
+    \huge\textbf{ {{.ATTiny85Title}} }
+    \large\textbf{ {{.ATTiny85SubTitle}} }
+\end{center}
+ 
+\begin{center}
+\begin{circuitikz} 
+\draw
+ 
+{{.ATTiny85-data}}
+\end{circuitikz}
+\end{center}
+\begin{center}
+    
+    \small{ {{.ATTiny85Tag}} }
+    
+\end{center}
+\end{document}
