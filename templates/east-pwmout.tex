@@ -1,7 +1,4 @@
-
-\pgfmathsetmacro{\xpos}{ {{.Ypos}} } % You can change this value as needed
-% Draw an analog-like waveform arrow into pin{{.Pin}}
-
+\pgfmathsetmacro{\xpos}{ {{.Ypos}} } 
 \draw[thick, ->] ($(chip.east) + (0.5,\xpos)$) -- ++(0.00,0) -- ++(0,0.2) -- ++(0.05,0) -- ++(0,-0.2) -- ++(0.05,0) -- ++(0,0.2) -- ++(0.07,0) -- ++(0,-0.2)  -- ++(0.10,0) -- ++(0,0.2) -- ++(0.08,0) -- ++(0,-0.2) -- ++(0.08,0) -- ($(chip.east) + (1,\xpos)$);
 
 \draw

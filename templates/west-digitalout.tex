@@ -1,10 +1,6 @@
-
-
-\pgfmathsetmacro{\xpos}{ {{.Ypos}} } % You can change this value as needed
-% Draw an digital-like waveform arrow into pin {{.Pin}}
-
+\pgfmathsetmacro{\xpos}{ {{.Ypos}} }  
 \draw[thick, ->] ($(chip.west) + (-0.5,\xpos)$) -- ++(-0.1,0) -- ++(0,0.2) -- ++(-0.2,0) -- ++(0,-0.2) -- ++(-0.2,0) -- ($(chip.west) + (-1,\xpos)$);
 \draw
 (chip.west)  ++(-1,\xpos)
- node[left] { {{.PinText}} }  ;
+ node[left] { {{.PinText}} };
 
