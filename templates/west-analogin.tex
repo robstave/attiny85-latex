@@ -1,0 +1,14 @@
+
+
+% pin1
+%\pgfmathsetmacro{\xpos}{1.5} % You can change this value as needed
+
+\pgfmathsetmacro{\xpos}{ {{.Ypos}} } % You can change this value as needed
+% Draw an analog-like waveform arrow into pin {{.Pin}}
+\draw[thick, ->] ($(chip.west) + (-1,\xpos)$)
+    to[edge label={},out=90,in=90] ++(0.1,0.2)
+    to[out=90,in=90] ++(0.1,-0.2)
+    -- ($(chip.west) + (-0.5,\xpos)$);
+\draw
+(chip.west)  ++(-1,\xpos)
+node[left] { {{.PinText}} } ;

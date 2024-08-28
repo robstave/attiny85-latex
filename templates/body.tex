@@ -1,0 +1,68 @@
+    % Draw the ATTINY85 chip
+    (0,0) node[draw, minimum width=3cm, minimum height=4cm, anchor=center] (chip) {ATTINY85}
+
+    % Draw the pins and labels
+    % Left side pins
+    (chip.west)  ++(0,1.5)
+    node[rectangle, draw,   minimum size=4pt, anchor=east] {}
+    node[right] {RST} 
+    ++(0,0.1)
+    node[above left] {1} 
+
+    % Draw an arrow flowing into pin 1 from the left
+
+ 
+
+    (chip.west) ++(0,0.5) 
+    node[rectangle, draw,   minimum size=4pt, anchor=east] {}  
+    node[right] {PB3} 
+    ++(0,0.1)
+    node[above left] {2}  
+     
+    (chip.west)   ++(0,-0.5) 
+    node[rectangle, draw,   minimum size=4pt, anchor=east] {}
+    node[right] {PB4} 
+    ++(0,0.1)
+    node[above left] {3} 
+
+    
+    (chip.west) ++(0,-1.5) 
+    node[rectangle, draw,   minimum size=4pt, anchor=east] {} % Ground
+    node[right] {GND} 
+    ++(0,0.1)
+    node[above left] {4} 
+ 
+
+
+
+    % Right side pins
+    (chip.east)  ++(-0,1.5) 
+    node[rectangle, draw,   minimum size=4pt, anchor=west] {} % Ground
+    node[left] {VCC}
+    ++(0, 0.1)
+    node[above right] {8} 
+      
+   
+    
+    (chip.east) ++(-0,0.5)
+    node[rectangle, draw,   minimum size=4pt, anchor=west] {}  
+    node[left] {PB2}
+    ++(0, 0.1)
+    node[above right] {7} 
+
+ 
+    
+    (chip.east)   ++(-0,-0.5) 
+    node[rectangle, draw,   minimum size=4pt, anchor=west] {} 
+    node[left] {PB1}
+    ++(0, 0.1)
+    node[above right] {6} 
+        
+ 
+    
+    (chip.east)  ++(-0,-1.5) 
+        node[rectangle, draw,   minimum size=4pt, anchor=west] {} 
+    node[left] {PB0}
+    ++(0, 0.1)
+    node[above right] {5} 
+        ;
