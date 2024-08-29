@@ -4,7 +4,7 @@ import "fmt"
 
 type Data struct {
 	Title    string  `json:"title"`
-	SubTitle string  `json:"subtitle"`
+	Subtitle string  `json:"subtitle"`
 	Tag      string  `json:"tag"`
 	Pin1     PinData `json:"pin1"`
 	Pin2     PinData `json:"pin2"`
@@ -13,6 +13,7 @@ type Data struct {
 	Pin5     PinData `json:"pin5"`
 	Pin6     PinData `json:"pin6"`
 	Pin7     PinData `json:"pin7"`
+	Body     string  `json:"body"`
 }
 
 type PinData struct {

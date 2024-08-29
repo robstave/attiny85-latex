@@ -2,7 +2,6 @@ package latex
 
 import (
 	"attiny85-latex/internal/data"
-	"fmt"
 	"os"
 	"strings"
 	"testing"
@@ -60,19 +59,33 @@ func TestWriteToFile(t *testing.T) {
 	os.Remove(outputPath)
 }
 
-func TestPD(t *testing.T) {
+func TestBuildWestSubPin(t *testing.T) {
 	pinData := data.PinData{Pin: 2, PinText: "in2", PinType: data.ANALOGIN}
-	fmt.Println("111")
+
 	result, err := buildWestSubPin(pinData)
 
 	if err != nil {
 		t.Fatalf("Failed to write to file: %v", err)
 	}
 
-	fmt.Println(result)
+	if result == "" {
+		t.Fatalf("%s", result)
+	}
 
-	if result != "g" {
-		t.Fatalf(result)
+}
+
+func TestBuildWestSubPin3(t *testing.T) {
+	pinData := data.PinData{Pin: 3, PinText: "in3", PinType: data.DIGIN}
+	result, err := buildWestSubPin(pinData)
+
+	if err != nil {
+		t.Fatalf("Failed to write to file: %v", err)
+	}
+
+	//fmt.Println(result)
+
+	if result == "" {
+		t.Fatalf("%s", result)
 	}
 
 }

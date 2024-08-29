@@ -2,25 +2,28 @@ package latex
 
 import (
 	"attiny85-latex/internal/data"
+	"errors"
 	"fmt"
 	"os"
 	"strings"
 	"text/template"
 )
 
-func buildWestSubTemplate(pin int, allData data.Data) (string, error) {
+func buildWestSubTemplate(allData data.Data) (string, error) {
 
+	result := ""
 	pd2, err := data.GetPinData(allData, 2)
 	if err != nil {
-		return "", err
+		return "", errors.New("GetPinData pin 2")
 	}
 
 	p2String, err := buildWestSubPin(pd2)
 	if err != nil {
-		return "", err
+		return "", errors.New("buildWestSubPin pin 2")
 	}
 
-	fmt.Println("p2String", p2String)
+	result = result + p2String
+	//fmt.Println("p2String:", p2String)
 
 	pd3, err := data.GetPinData(allData, 3)
 	if err != nil {
@@ -29,12 +32,54 @@ func buildWestSubTemplate(pin int, allData data.Data) (string, error) {
 
 	p3String, err := buildWestSubPin(pd3)
 	if err != nil {
+		return "", errors.New("buildWestSubPin pin 2")
+	}
+	result = result + p3String
+
+	return result, nil
+
+}
+
+func buildEastSubTemplate(allData data.Data) (string, error) {
+
+	result := ""
+	pd5, err := data.GetPinData(allData, 5)
+	if err != nil {
 		return "", err
 	}
 
-	fmt.Println("p3String", p3String)
+	p5String, err := buildEastSubPin(pd5)
+	if err != nil {
+		return "", errors.New("buildEastSubPin pin 5")
+	}
 
-	return "", nil
+	result = result + p5String
+
+	pd6, err := data.GetPinData(allData, 6)
+	if err != nil {
+		return "", err
+	}
+
+	p6String, err := buildEastSubPin(pd6)
+	if err != nil {
+		return "", errors.New("buildEastSubPin pin 6")
+	}
+
+	result = result + p6String
+
+	pd7, err := data.GetPinData(allData, 7)
+	if err != nil {
+		return "", err
+	}
+
+	p7String, err := buildEastSubPin(pd7)
+	if err != nil {
+		return "", errors.New("buildEastSubPin pin 7")
+	}
+
+	result = result + p7String
+
+	return result, nil
 
 }
 
@@ -46,7 +91,6 @@ func buildWestSubPin(pd data.PinData) (string, error) {
 
 	if pd.PinType == data.DIGIN {
 		return generateWestDigitalIn(pd.Pin, pd.PinText)
-
 	}
 
 	if pd.PinType == data.DIGOUT {
@@ -54,7 +98,7 @@ func buildWestSubPin(pd data.PinData) (string, error) {
 
 	}
 
-	return "", nil
+	return "", errors.New("buildWestSubPin")
 }
 
 func buildEastSubPin(pd data.PinData) (string, error) {
@@ -77,7 +121,7 @@ func buildEastSubPin(pd data.PinData) (string, error) {
 
 	}
 
-	return "", nil
+	return "", errors.New("buildEastSubPin")
 }
 
 // GenerateLaTeXContent applies the parsed template with the data and returns the LaTeX content as a string.
@@ -117,6 +161,24 @@ func WriteToFile(outputPath, content string) error {
 
 // GenerateLaTeX combines the steps to generate the LaTeX file from template and data.
 func GenerateLaTeX(templatePath, outputPath string, data data.Data) error {
+
+	west, err := buildWestSubTemplate(data)
+	if err != nil {
+		fmt.Println("error building west")
+
+		return err
+	}
+	//fmt.Println(west)
+	east, err := buildEastSubTemplate(data)
+	if err != nil {
+		fmt.Println("error building east")
+
+		return err
+	}
+	//fmt.Println(east)
+
+	data.Body = generateBody() + west + east
+
 	tmpl, err := ParseTemplate(templatePath)
 	if err != nil {
 		return err

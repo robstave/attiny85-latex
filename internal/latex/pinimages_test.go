@@ -87,3 +87,17 @@ func TestGenerateEastDigitalOut(t *testing.T) {
 		t.Error("oops")
 	}
 }
+
+func TestGenerateEastPWMOut(t *testing.T) {
+
+	pin := 1
+	text := "foo"
+	result, err := generateEastPMWOut(pin, text)
+	if err != nil {
+		t.Errorf("generateEastPMWOut(%d, %s) returned error: %v", 1, "test.pinText", err)
+	}
+
+	if result == "" {
+		t.Error("oops")
+	}
+}

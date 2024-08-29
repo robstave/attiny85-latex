@@ -19,8 +19,8 @@ func TestLoadJSON(t *testing.T) {
 	if alldata.Title != title {
 		t.Errorf("Expected title %s, got %s", title, alldata.Title)
 	}
-	if alldata.SubTitle != subtitle {
-		t.Errorf("Expected subtitle %s, got %s", title, alldata.SubTitle)
+	if alldata.Subtitle != subtitle {
+		t.Errorf("Expected subtitle %s, got %s", title, alldata.Subtitle)
 	}
 	if alldata.Tag != tag {
 		t.Errorf("Expected tag %s, got %s", title, alldata.Tag)
