@@ -1,0 +1,35 @@
+{
+    "title": "ACS-85-0001",
+    "subtitle": "Simple Oscillator",
+    "tag": "github.com/robstave/ArduinoComponentSketches",
+    "pin2": {
+        "pin":2,
+        "pintype": "DOUT",
+        "pintext": "LFO"
+    },
+    "pin3": {
+        "pin":3,
+        "pintype": "DOUT",
+        "pintext": "LFO"
+    },
+    "pin5": {
+        "pin":5,
+        "pintype": "DOUT",
+        "pintext": "434hz"
+    },
+    "pin6": {
+        "pin":6,
+        "pintype": "DOUT",
+        "pintext": "347hz"
+    },
+    "pin7": {
+        "pin":7,
+        "pintype": "DOUT",
+        "pintext": "ramp"
+    }
+
+ 
+}
+
+ 
+

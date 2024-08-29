@@ -20,7 +20,7 @@ func TestParseTemplate(t *testing.T) {
 }
 
 func TestGenerateLaTeXContent(t *testing.T) {
-	tmpl := template.Must(template.New("test").Parse("{{.Title}} - {{.Color}} {{.Fruit}}"))
+	tmpl := template.Must(template.New("test").Parse("{{.Title}}  "))
 
 	data := data.Data{
 		Title: "Yum",
@@ -31,10 +31,6 @@ func TestGenerateLaTeXContent(t *testing.T) {
 		t.Fatalf("Failed to generate LaTeX content: %v", err)
 	}
 
-	//expected := "Yum - red apple"
-	//if strings.TrimSpace(content) != expected {
-	//	t.Fatalf("Expected '%s', got '%s'", expected, content)
-	//}
 }
 
 func TestWriteToFile(t *testing.T) {
@@ -81,8 +77,6 @@ func TestBuildWestSubPin3(t *testing.T) {
 	if err != nil {
 		t.Fatalf("Failed to write to file: %v", err)
 	}
-
-	//fmt.Println(result)
 
 	if result == "" {
 		t.Fatalf("%s", result)

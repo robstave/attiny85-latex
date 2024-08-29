@@ -2,6 +2,9 @@ package data
 
 import _ "embed"
 
+//go:embed templates/attiny85.tex
+var ATTiny85 string
+
 //go:embed templates/body.tex
 var ATTinyBody string
 

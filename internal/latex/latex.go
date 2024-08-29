@@ -9,122 +9,65 @@ import (
 	"text/template"
 )
 
-func buildWestSubTemplate(allData data.Data) (string, error) {
+// BuildSubTemplate constructs the template for a given set of pin numbers and their corresponding build function.
+func BuildSubTemplate(allData data.Data, pinNumbers []int, buildPinFunc func(data.PinData) (string, error)) (string, error) {
+	var result string
+	for _, pin := range pinNumbers {
+		pinData, err := data.GetPinData(allData, pin)
+		if err != nil {
+			return "", fmt.Errorf("GetPinData pin %d: %w", pin, err)
+		}
 
-	result := ""
-	pd2, err := data.GetPinData(allData, 2)
-	if err != nil {
-		return "", errors.New("GetPinData pin 2")
+		pinString, err := buildPinFunc(pinData)
+		if err != nil {
+			return "", fmt.Errorf("buildSubPin pin %d: %w", pin, err)
+		}
+
+		result += pinString
 	}
-
-	p2String, err := buildWestSubPin(pd2)
-	if err != nil {
-		return "", errors.New("buildWestSubPin pin 2")
-	}
-
-	result = result + p2String
-	//fmt.Println("p2String:", p2String)
-
-	pd3, err := data.GetPinData(allData, 3)
-	if err != nil {
-		return "", err
-	}
-
-	p3String, err := buildWestSubPin(pd3)
-	if err != nil {
-		return "", errors.New("buildWestSubPin pin 2")
-	}
-	result = result + p3String
-
 	return result, nil
-
 }
 
-func buildEastSubTemplate(allData data.Data) (string, error) {
-
-	result := ""
-	pd5, err := data.GetPinData(allData, 5)
-	if err != nil {
-		return "", err
-	}
-
-	p5String, err := buildEastSubPin(pd5)
-	if err != nil {
-		return "", errors.New("buildEastSubPin pin 5")
-	}
-
-	result = result + p5String
-
-	pd6, err := data.GetPinData(allData, 6)
-	if err != nil {
-		return "", err
-	}
-
-	p6String, err := buildEastSubPin(pd6)
-	if err != nil {
-		return "", errors.New("buildEastSubPin pin 6")
-	}
-
-	result = result + p6String
-
-	pd7, err := data.GetPinData(allData, 7)
-	if err != nil {
-		return "", err
-	}
-
-	p7String, err := buildEastSubPin(pd7)
-	if err != nil {
-		return "", errors.New("buildEastSubPin pin 7")
-	}
-
-	result = result + p7String
-
-	return result, nil
-
+// BuildWestSubTemplate constructs the West sub-template by invoking BuildSubTemplate with West-specific pin numbers and function.
+func BuildWestSubTemplate(allData data.Data) (string, error) {
+	return BuildSubTemplate(allData, []int{2, 3}, buildWestSubPin)
 }
 
+// BuildEastSubTemplate constructs the East sub-template by invoking BuildSubTemplate with East-specific pin numbers and function.
+func BuildEastSubTemplate(allData data.Data) (string, error) {
+	return BuildSubTemplate(allData, []int{5, 6, 7}, buildEastSubPin)
+}
+
+// buildWestSubPin generates the string for a West sub-pin based on its type.
 func buildWestSubPin(pd data.PinData) (string, error) {
-
-	if pd.PinType == data.ANALOGIN {
+	switch pd.PinType {
+	case data.ANALOGIN:
 		return generateWestAnalogIn(pd.Pin, pd.PinText)
-	}
-
-	if pd.PinType == data.DIGIN {
+	case data.DIGIN:
 		return generateWestDigitalIn(pd.Pin, pd.PinText)
-	}
-
-	if pd.PinType == data.DIGOUT {
+	case data.DIGOUT:
 		return generateWestDigitalOut(pd.Pin, pd.PinText)
-
+	default:
+		return "", errors.New("unsupported pin type for BuildWestSubPin")
 	}
-
-	return "", errors.New("buildWestSubPin")
 }
 
+// buildEastSubPin generates the string for an East sub-pin based on its type.
 func buildEastSubPin(pd data.PinData) (string, error) {
-
-	if pd.PinType == data.PWM {
+	switch pd.PinType {
+	case data.PWM:
 		return generateEastPMWOut(pd.Pin, pd.PinText)
-	}
-
-	if pd.PinType == data.ANALOGIN {
+	case data.ANALOGIN:
 		return generateEastAnalogIn(pd.Pin, pd.PinText)
-	}
-
-	if pd.PinType == data.DIGIN {
+	case data.DIGIN:
 		return generateEastDigitalIn(pd.Pin, pd.PinText)
-
-	}
-
-	if pd.PinType == data.DIGOUT {
+	case data.DIGOUT:
 		return generateEastDigitalOut(pd.Pin, pd.PinText)
-
+	default:
+		return "", errors.New("unsupported pin type for BuildEastSubPin")
 	}
-
-	return "", errors.New("buildEastSubPin")
 }
 
-// GenerateLaTeXContent applies the parsed template with the data and returns the LaTeX content as a string.
 func GenerateLaTeXContent(tmpl *template.Template, data data.Data) (string, error) {
 	var result strings.Builder
 	err := tmpl.Execute(&result, data)
@@ -160,28 +103,27 @@ func WriteToFile(outputPath, content string) error {
 }
 
 // GenerateLaTeX combines the steps to generate the LaTeX file from template and data.
-func GenerateLaTeX(templatePath, outputPath string, data data.Data) error {
+func GenerateLaTeX(outputPath string, data data.Data) error {
 
-	west, err := buildWestSubTemplate(data)
+	west, err := BuildWestSubTemplate(data)
 	if err != nil {
 		fmt.Println("error building west")
 
 		return err
 	}
 	//fmt.Println(west)
-	east, err := buildEastSubTemplate(data)
+	east, err := BuildEastSubTemplate(data)
 	if err != nil {
 		fmt.Println("error building east")
 
 		return err
 	}
-	//fmt.Println(east)
 
 	data.Body = generateBody() + west + east
 
-	tmpl, err := ParseTemplate(templatePath)
+	tmpl, err := template.New("example").Parse(generateMain())
 	if err != nil {
-		return err
+		panic(err)
 	}
 
 	content, err := GenerateLaTeXContent(tmpl, data)

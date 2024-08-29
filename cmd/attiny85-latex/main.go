@@ -31,9 +31,9 @@ func main() {
 	fmt.Println("data", data)
 	// Load the LaTeX template
 	//templatePath := "templates/template.tex"
-	templatePath := "templates/attiny85.tex"
+	//templatePath := "templates/attiny85.tex"
 
-	err = latex.GenerateLaTeX(templatePath, "output/output.tex", data)
+	err = latex.GenerateLaTeX("output/output.tex", data)
 	if err != nil {
 		fmt.Println("Error generating LaTeX:", err)
 		os.Exit(1)
