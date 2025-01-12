@@ -119,7 +119,10 @@ func GenerateLaTeX(outputPath string, data data.Data) error {
 		return err
 	}
 
-	data.Body = generateBody() + west + east
+	nodeStart := "\n \\begin{scope}[overlay]  \n"
+	nodeEnd := "\n \\end{scope} \n"
+
+	data.Body = generateBody() + nodeStart + west + east + nodeEnd
 
 	tmpl, err := template.New("example").Parse(generateMain())
 	if err != nil {

@@ -65,13 +65,7 @@ And sometimes the centering is not perfect.
 I use Overleaf to view and tweak as needed
 
 www.overleaf.com
-
-![example](assets/issue.png)
-
-notice the centering is not quite right.
-This can be fixed with the hspace field
  
-![example](assets/issue2.png)
 
 ## Features
 
