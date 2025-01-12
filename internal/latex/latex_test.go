@@ -9,7 +9,7 @@ import (
 )
 
 func TestParseTemplate(t *testing.T) {
-	tmpl, err := ParseTemplate("../../templates/template.tex")
+	tmpl, err := ParseTemplate("../../test/template.tex")
 	if err != nil {
 		t.Fatalf("Failed to parse template: %v", err)
 	}

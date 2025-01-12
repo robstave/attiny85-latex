@@ -2,6 +2,7 @@ package latex
 
 import (
 	"attiny85-latex/internal/data"
+	"errors"
 	"html/template"
 	"strings"
 )
@@ -14,6 +15,9 @@ type Pin struct {
 
 func generateFromTemplateString(tmplStr string, pin int, pinText string) (string, error) {
 
+	if pin < 0 {
+		return "", errors.New("ban pin")
+	}
 	tmpl, err := template.New("example").Parse(tmplStr)
 	if err != nil {
 		panic(err)
