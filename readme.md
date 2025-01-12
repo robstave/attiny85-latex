@@ -181,7 +181,7 @@ The application generates a LaTeX document based on the provided JSON configurat
 
    ```
 
-   pins 4 and 8 are reserved for Ground and V+
+pins 4 and 8 are reserved for Ground and V+
 
 2. **Run the Application:**
 
@@ -248,10 +248,6 @@ This project is licensed under the [MIT License](LICENSE).
 
 ---
 
-## Contact
-
-For questions or support, please open an issue on the GitHub repository or contact the maintainer at [your-email@example.com](mailto:your-email@example.com).
-
----
+ 
 
 Happy TeXing!
