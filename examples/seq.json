@@ -1,0 +1,35 @@
+{
+    "title": "Sequencer",
+    "subtitle": "General pattern",
+    "tag": "github.com/robstave/ArduinoComponentSketches",
+    "pin2": {
+        "pin":2,
+        "pintype": "AIN",
+        "pintext": "CV 1"
+    },
+    "pin3": {
+        "pin":3,
+        "pintype": "AIN",
+        "pintext": "CV 2"
+    },
+    "pin5": {
+        "pin":5,
+        "pintype": "DOUT",
+        "pintext": "Out 0"
+    },
+    "pin6": {
+        "pin":6,
+        "pintype": "PWM",
+        "pintext": "PWM out"
+    },
+    "pin7": {
+        "pin":7,
+        "pintype": "DIN",
+        "pintext": "Clock/Trigger"
+    }
+
+ 
+}
+
+ 
+
