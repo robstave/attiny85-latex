@@ -14,11 +14,11 @@
 
 \begin{center}
     \fontfamily{qhv}\selectfont
-    \huge\textbf{ Cowbell \\}
-    \large\textbf{ General pattern }
+    \huge\textbf{ ACS-85-0001 \\}
+    \large\textbf{ Simple Oscillator }
 \end{center}
  
-\hspace{2cm}
+\hspace{1cm}
 \makebox[0pt][l]{
 \begin{circuitikz} 
     \fontfamily{qhv}\selectfont
@@ -97,37 +97,36 @@
     ++(0, 0.1)
     node[above right] {5}  ;
 \pgfmathsetmacro{\xpos}{ 0.5 }  
-\draw[thick, ->] ($(chip.west) + (-1,\xpos)$)
-    to[edge label={},out=90,in=90] ++(0.1,0.2)
-    to[out=90,in=90] ++(0.1,-0.2)
-    -- ($(chip.west) + (-0.5,\xpos)$);
+\draw[thick, ->] ($(chip.west) + (-0.5,\xpos)$) -- ++(-0.1,0) -- ++(0,0.2) -- ++(-0.2,0) -- ++(0,-0.2) -- ++(-0.2,0) -- ($(chip.west) + (-1,\xpos)$);
 \draw
 (chip.west)  ++(-1,\xpos)
-node[left] { Pot/CV 1 };\pgfmathsetmacro{\xpos}{ -0.5 }  
-\draw[thick, ->] ($(chip.west) + (-1,\xpos)$)
-    to[edge label={},out=90,in=90] ++(0.1,0.2)
-    to[out=90,in=90] ++(0.1,-0.2)
-    -- ($(chip.west) + (-0.5,\xpos)$);
+ node[left] { LFO };
+
+\pgfmathsetmacro{\xpos}{ -0.5 }  
+\draw[thick, ->] ($(chip.west) + (-0.5,\xpos)$) -- ++(-0.1,0) -- ++(0,0.2) -- ++(-0.2,0) -- ++(0,-0.2) -- ++(-0.2,0) -- ($(chip.west) + (-1,\xpos)$);
 \draw
 (chip.west)  ++(-1,\xpos)
-node[left] { Pot/CV 2 }; 
+ node[left] { LFO };
+
+ 
 \pgfmathsetmacro{\xpos}{ -1.5 } 
 
 \draw[thick, ->] ($(chip.east) + (0.5,\xpos)$) -- ++(0.1,0) -- ++(0,0.2) -- ++(0.2,0) -- ++(0,-0.2) -- ++(0.1,0) -- ($(chip.east) + (1,\xpos)$);
 \draw
 (chip.east)  ++(1,\xpos)
-node[right] { Out 0 } ;\pgfmathsetmacro{\xpos}{ -0.5 } 
-\draw[thick, ->] ($(chip.east) + (0.5,\xpos)$) -- ++(0.00,0) -- ++(0,0.2) -- ++(0.05,0) -- ++(0,-0.2) -- ++(0.05,0) -- ++(0,0.2) -- ++(0.07,0) -- ++(0,-0.2)  -- ++(0.10,0) -- ++(0,0.2) -- ++(0.08,0) -- ++(0,-0.2) -- ++(0.08,0) -- ($(chip.east) + (1,\xpos)$);
+node[right] { 434hz } ; 
+\pgfmathsetmacro{\xpos}{ -0.5 } 
 
+\draw[thick, ->] ($(chip.east) + (0.5,\xpos)$) -- ++(0.1,0) -- ++(0,0.2) -- ++(0.2,0) -- ++(0,-0.2) -- ++(0.1,0) -- ($(chip.east) + (1,\xpos)$);
 \draw
 (chip.east)  ++(1,\xpos)
-node[right] { PWM out } ; \pgfmathsetmacro{\xpos}{ 0.5 } 
-\draw[thick, ->] ($(chip.east) + (1,\xpos)$) -- ++(-0.1,0) -- ++(0,0.2) -- ++(-0.2,0) -- ++(0,-0.2) -- ++(-0.2,0) -- ($(chip.east) + (0.5,\xpos)$);
+node[right] { 347hz } ; 
+\pgfmathsetmacro{\xpos}{ 0.5 } 
+
+\draw[thick, ->] ($(chip.east) + (0.5,\xpos)$) -- ++(0.1,0) -- ++(0,0.2) -- ++(0.2,0) -- ++(0,-0.2) -- ++(0.1,0) -- ($(chip.east) + (1,\xpos)$);
 \draw
 (chip.east)  ++(1,\xpos)
-node[right]  { Clock/Trigger };
-
-
+node[right] { ramp } ;
 \end{circuitikz}
 }
 \begin{center}
