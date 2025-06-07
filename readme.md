@@ -228,20 +228,6 @@ pins 4 and 8 are reserved for Ground and V+
 In a bit of a time crunch, so I will not be maintaining this too much. We will see.  If it really is working out
 for you, fork and let it take on a life of its own.
 
----
-
-## ChatGTP Friendly
-
-There is a Chat friendly feature here. Use the Concat command to glom all the files into on file.
-
-According to https://platform.openai.com/tokenizer its under 5k.  So you can just paste the whole thing into o-1 mini and ask away. Way better than copilot.
-
-Edit the file_list.yaml if you want to add or remove files from the context.
-
-
-
----
-
 ## License
 
 This project is licensed under the [MIT License](LICENSE).
