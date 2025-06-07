@@ -20,7 +20,7 @@
     "pin6": {
         "pin":6,
         "pintype": "PWM",
-        "pintext": "out pwm"
+        "pintext": "pwm"
     },
     "pin7": {
         "pin":7,
